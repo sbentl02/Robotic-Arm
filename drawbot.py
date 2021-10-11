@@ -5,7 +5,7 @@ import RPi.GPIO as GPIO
 from surface_mapping import *
 from adafruit_servokit import ServoKit
 from motors import IK_Solve
-
+from get_xy import get_xy, read_SVG
 
 if __name__ == "__main__":
     #Initialize servo communication
