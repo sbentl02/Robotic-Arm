@@ -18,6 +18,9 @@ def read_SVG(filename, sampling_rate):
     #s.setworldcoordinates(int(dims[0]), int(dims[1]), int(dims[2]), int(dims[3]))
     s.setworldcoordinates(-50, -50, 50,50)
 
+    print(len(paths))
+    for path in paths:
+        print(len(path))
     for path in paths:
         time.sleep(1)
         print("New path")

@@ -24,6 +24,7 @@ s2 = -math.sqrt(1-c2**2)
 theta2 = math.atan2(s2, c2)
 print(theta2)
 
+#Base theta: arctan (y/x)
 
 alpha = math.atan2(y_w, x_w)
 
