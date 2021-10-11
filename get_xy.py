@@ -1,5 +1,4 @@
 from svgpathtools import svg2paths2
-import time
 
 def setup_SVG(filename):
     paths, attributes, svg_attributes = svg2paths2(filename)
@@ -7,7 +6,6 @@ def setup_SVG(filename):
     dims = dimensions.split()
 
     return paths
-
 
 def get_xy(xy_coords, timestep):
     xy = xy_coords[timestep]
@@ -32,7 +30,6 @@ def read_SVG(filename, sampling_rate):
                     xy = tuple((seg.point(i/sampling_rate).real, seg.point(i/sampling_rate).imag, 1))   
                 else: 
                     xy = tuple((seg.point(i/sampling_rate).real, seg.point(i/sampling_rate).imag, 1))
-                #print(seg.point(i/sampling_rate).real, seg.point(i/sampling_rate).imag)
                 xy_coords.append(xy)
 
     return xy_coords
