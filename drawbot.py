@@ -94,11 +94,7 @@ def main():
 
                     for ang in angles:
                         kit.servo[ang].angle = angles[ang]
-<<<<<<< HEAD
-
-=======
                     i += 1
->>>>>>> 92a7dcdb1870ea913eea450ad9d9fef8f4b74a9c
                     if (down and not prev_state):
                         pendown(x, y, z)
                     elif (not down and prev_state):
