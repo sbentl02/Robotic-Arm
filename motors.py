@@ -27,19 +27,15 @@ def IK_Solve(x, y, z):
     x_w = x_e - length3 * math.cos(phi_e)
     y_w = y_e - length3 * math.sin(phi_e)
     print(x_w, y_w)
-
-    #Woodward's method
     
     theta3 = math.pi - math.acos((length1**2 + length2**2 - x_w**2 - y_w**2)/(2*length1*length2))    
 
 
     alpha = math.atan2(y_w, x_w)
 
-    theta2 = math.pi - math.acos((length1**2 + length2**2 - x_w**2 - y_w**2)/(2*length1*length2))
-    print(theta3)
-    theta1 = alpha - math.acos((x_w**2 + y_w**2 + length1**2 - length2**2)/(2*length1*math.sqrt(x_w**2 + y_w**2)))
+    theta2 = alpha - math.acos((x_w**2 + y_w**2 + length1**2 - length2**2)/(2*length1*math.sqrt(x_w**2 + y_w**2)))
     print(theta2)
-    theta4 = phi_e - theta1 - theta2
+    theta4 = phi_e - theta2 - theta3
     print(theta4)
 
     return [theta1, theta2, theta3, theta4]
