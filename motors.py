@@ -29,12 +29,12 @@ def IK_Solve(x, y, z):
     print(x_w, y_w)
     
     theta3 = math.pi - math.acos((length1**2 + length2**2 - x_w**2 - y_w**2)/(2*length1*length2))    
-    theta3 -= math.pi
+    theta3 = math.pi - theta3
 
     alpha = math.atan2(y_w, x_w)
 
     theta2 = alpha - math.acos((x_w**2 + y_w**2 + length1**2 - length2**2)/(2*length1*math.sqrt(x_w**2 + y_w**2)))
-    theta2 -= math.pi
+    theta2 = math.pi - theta2
     theta4 = phi_e - theta2 - theta3
     
 
