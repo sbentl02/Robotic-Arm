@@ -122,8 +122,8 @@ def main():
 def sample_z_point(x, y):
     angles = IK_Solve(x, y, 0)
 
-    for ang in angles:
-        kit.servo[ang].angle = angles[ang]
+    for j in range(len(angles)):
+        kit.servo[j].angle = angles[j]
 
     time.sleep(0.5)
 
