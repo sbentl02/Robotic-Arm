@@ -47,7 +47,7 @@ def main():
     sample_z = False
     isWriting = False
     N = 20
-    step_interval = 10 #time per motor move in ms
+    step_interval = 50 #time per motor move in ms
     prev_state = 0
     i = 0
 
