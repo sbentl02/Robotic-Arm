@@ -6,6 +6,7 @@ from surface_mapping import *
 from adafruit_servokit import ServoKit
 from motors import IK_Solve
 from get_xy import get_xy, read_SVG
+from svgpathtools import svg2paths2
 
 if __name__ == "__main__":
     #Initialize servo communication
@@ -44,8 +45,10 @@ if __name__ == "__main__":
     kit.servo[3].angle = 90
 
     #Read in SVG file
-    paths, attributes, svg_attributes = svg2paths2(filename)
     xy_coords = read_SVG("Examples/initials_JA.svg", 10)
+
+    main()
+
 
 def time_ms():
     return time.time_ns() / 1000000

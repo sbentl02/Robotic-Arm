@@ -17,9 +17,7 @@ def read_SVG(filename, sampling_rate):
     xy_coords = []
 
     for path in paths:
-        print("New path")
         for seg in path:
-            print("New seg")
             for i in range(0, sampling_rate + 1):
                 if (i+1 >= sampling_rate): #End of segment, pen up with 0
                     xy = tuple((seg.point(i/sampling_rate).real, seg.point(i/sampling_rate).imag, 0))
