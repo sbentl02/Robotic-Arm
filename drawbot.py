@@ -104,7 +104,6 @@ def main():
                     for j in range(len(angles)):
                         kit.servo[j].angle = angles[j]
                     i += 1
-                    time.sleep(0.25)
 
                     if (down and not prev_state):
                         pendown(x, y, z)
