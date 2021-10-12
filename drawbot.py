@@ -82,7 +82,7 @@ def main():
                     if hasZMesh:
                         z = fit_func((x, y), inter, coef)
                     else:
-                        z = z_offset
+                        z = -z_offset
 
 
                     previous_time = current_time
