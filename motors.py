@@ -27,7 +27,7 @@ def IK_Solve(x, y, z):
     print(x_w, y_w)
 
     #Woodward's method
-    c2 = (x_w**2 + y_w**2 - length1**2 - length2**2)/(2*length1*length2)
+    c2 = (x_w**2 + y_w**2 - length1**2 - length2**2)/(-2*length1*length2)
     s2 = -math.sqrt(1-c2**2)
     theta3 = math.atan2(s2, c2)
     print(theta2)
