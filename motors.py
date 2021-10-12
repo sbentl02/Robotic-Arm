@@ -28,7 +28,7 @@ def IK_Solve(x, y, z):
     y_w = y_e - length3 * math.sin(phi_e)
     
     theta3 = math.pi - math.acos((length1**2 + length2**2 - x_w**2 - y_w**2)/(2*length1*length2))    
-    theta3_out = 2*math.pi - (theta3)
+    theta3_out = 3*math.pi/2 - (theta3)
 
     alpha = math.atan2(y_w, x_w)
 
