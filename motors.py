@@ -5,6 +5,8 @@ import time, math
 
 def IK_Solve(x, y, z):
     #Convert to polar coordinates
+    x = x/6
+    y = y/6
     theta = math.atan2(y, x)
     r = math.sqrt(x**2 + y**2) - 9
 
