@@ -47,7 +47,7 @@ def main():
     sample_z = False
     isWriting = False
     N = 20
-    step_interval = 50 #time per motor move in ms
+    step_interval = 100 #time per motor move in ms
     prev_state = 0
     i = 0
 
@@ -104,7 +104,7 @@ def main():
                     for j in range(len(angles)):
                         kit.servo[j].angle = angles[j]
                     i += 1
-
+                    time.sleep(0.25)
 
                     if (down and not prev_state):
                         pendown(x, y, z)
