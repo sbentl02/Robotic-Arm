@@ -93,9 +93,11 @@ def main():
                     except Exception as e:
                         print("Inverse Kinematics failed! Exception: ", e)
 
-                    for ang in angles:
-                        kit.servo[ang].angle = angles[ang]
+                    for j in range(len(angles)):
+                        kit.servo[j].angle = angles[j]
                     i += 1
+
+
                     if (down and not prev_state):
                         pendown(x, y, z)
                     elif (not down and prev_state):
@@ -122,8 +124,8 @@ def pendown(x, y, z):
         angles = IK_Solve(x, y, z-10)
     except Exception as e:
         print("Inverse Kinematics failed! Exception: ", e)
-    for ang in angles:
-        kit.servo[ang].angle = angles[ang]
+    for j in range(len(angles)):
+        kit.servo[j].angle = angles[j]
 
 def penup(x, y, z):
     prev_state = 0
@@ -131,8 +133,8 @@ def penup(x, y, z):
         angles = IK_Solve(x, y, z+10)
     except Exception as e:
         print("Inverse Kinematics failed! Exception: ", e)
-    for ang in angles:
-        kit.servo[ang].angle = angles[ang]
+    for j in range(len(angles)):
+        kit.servo[j].angle = angles[j]
 
 
 if __name__ == "__main__":
