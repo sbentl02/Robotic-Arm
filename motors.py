@@ -11,7 +11,7 @@ def IK_Solve(x, y, z):
     r = math.sqrt(x**2 + y**2) - 9
 
     #Base angle is equal to theta
-    theta1 = theta
+    theta1 = theta + math.pi/4
 
     #Inverse Kinematic Equations for 3-link planar arm
     length1 = 102.7
