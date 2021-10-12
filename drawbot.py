@@ -45,8 +45,7 @@ if __name__ == "__main__":
 
     #Read in SVG file
     paths, attributes, svg_attributes = svg2paths2(filename)
-    xy_coords = read_SVG(filename, 10)
-
+    xy_coords = read_SVG("Examples/initials_JA.svg", 10)
 
 def time_ms():
     return time.time_ns() / 1000000
@@ -102,8 +101,6 @@ def main():
                         penup(x, y, z)
 
                     previous_time += step_interval
-
-
         except KeyboardInterrupt:
             break
     return
@@ -115,6 +112,7 @@ def sample_z_point(x, y):
         kit.servo[ang].angle = angles[ang]
 
     time.sleep(0.5)
+
 
 def pendown(x, y, z):
     prev_state = 1
