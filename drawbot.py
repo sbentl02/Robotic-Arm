@@ -28,8 +28,8 @@ GPIO.setup(DRAW_PIN, GPIO.IN)
 
 #Move servos to initial positions
 kit.servo[0].angle = 90
-kit.servo[1].angle = 60
-kit.servo[2].angle = 30
+kit.servo[1].angle = 120
+kit.servo[2].angle = 150
 kit.servo[3].angle = 90
 
 #Read in SVG file
