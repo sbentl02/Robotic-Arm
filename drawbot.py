@@ -102,8 +102,6 @@ def main():
                         penup(x, y, z)
                     
                     previous_time += step_interval
-
-
         except KeyboardInterrupt:
             break
     return
@@ -116,28 +114,23 @@ def sample_z_point(x, y):
 
     time.sleep(0.5)
 
-def sample_surface(n_samples, xbounds, ybounds):
-    #Move motor to sample location, take data, record to numpy array
-    np.empty((n_samples, n_samples))
-    xpoints = 
-    return
 
 def pendown(x, y, z):
     prev_state = 1
     #Attempt IK Solving
     try:
         angles = IK_Solve(x, y, z-10) 
-        except Exception as e:
-            print("Inverse Kinematics failed! Exception: ", e)
-        for ang in angles:
-            kit.servo[ang].angle = angles[ang]
+    except Exception as e:
+        print("Inverse Kinematics failed! Exception: ", e)
+    for ang in angles:
+        kit.servo[ang].angle = angles[ang]
                    
 
 def penup(x, y, z):
     prev_state = 0
     try:
         angles = IK_Solve(x, y, z+10) 
-        except Exception as e:
-            print("Inverse Kinematics failed! Exception: ", e)
-        for ang in angles:
-            kit.servo[ang].angle = angles[ang]
+    except Exception as e:
+        print("Inverse Kinematics failed! Exception: ", e)
+    for ang in angles:
+        kit.servo[ang].angle = angles[ang]
