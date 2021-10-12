@@ -6,15 +6,15 @@ import time, math
 def IK_Solve(x, y, z):
     #Convert to polar coordinates
     theta = math.atan2(y, x)
-    r = math.sqrt(x**2 + y**2)
+    r = math.sqrt(x**2 + y**2) - 9
 
     #Base angle is equal to theta
     theta1 = theta + 90
 
     #Inverse Kinematic Equations for 3-link planar arm
-    length1 = math.sqrt(6**2 + 4**2)
-    length2 = 4*math.sqrt(2)
-    length3 = 2
+    length1 = 102.7
+    length2 = 96.7
+    length3 = 35.1
 
     #Set end effector coordinates
     x_e = r
