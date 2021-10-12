@@ -1,4 +1,4 @@
-#!/usr/bin/env/python3
+#!/usr/bin/env/python3.7
 import time, math, sys
 import board, busio
 import RPi.GPIO as GPIO
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     #Read in SVG file
     paths, attributes, svg_attributes = svg2paths2(filename)
     xy_coords = read_SVG(filename, 10)
-   
+
 
 def time_ms():
     return time.time_ns() / 1000000
@@ -57,7 +57,7 @@ def main():
             current_time = time_ms()
             sample_z = GPIO.input(MESH_PIN)
             isWriting = GPIO.input(DRAW_PIN)
-            
+
             if sample_z == True:
                 GPIO.output(LED_RED, 1)
                 z_data = sample_surface(N, (-100, 100), (10, 100))
@@ -77,30 +77,30 @@ def main():
 
                     # Get x,y coordinates for drawing
                     x,y,down = get_xy(xy_coords, i)
-                    
+
                     #Get Z given current z mesh status
                     if has_ZMesh:
                         z = fit_func((x, y), inter, coef)
                     else:
                         z = z_offset
-                    
+
 
                     previous_time = current_time
-                    
+
                     #Attempt IK Solving
                     try:
-                        angles = IK_Solve(x, y, z) 
+                        angles = IK_Solve(x, y, z)
                     except Exception as e:
                         print("Inverse Kinematics failed! Exception: ", e)
 
                     for ang in angles:
                         kit.servo[ang].angle = angles[ang]
-                    
+
                     if (down and not prev_state):
                         pendown(x, y, z)
                     elif (not down and prev_state):
                         penup(x, y, z)
-                    
+
                     previous_time += step_interval
 
 
@@ -116,28 +116,21 @@ def sample_z_point(x, y):
 
     time.sleep(0.5)
 
-def sample_surface(n_samples, xbounds, ybounds):
-    #Move motor to sample location, take data, record to numpy array
-    np.empty((n_samples, n_samples))
-    xpoints = 
-    return
-
 def pendown(x, y, z):
     prev_state = 1
     #Attempt IK Solving
     try:
-        angles = IK_Solve(x, y, z-10) 
-        except Exception as e:
-            print("Inverse Kinematics failed! Exception: ", e)
-        for ang in angles:
-            kit.servo[ang].angle = angles[ang]
-                   
+        angles = IK_Solve(x, y, z-10)
+    except Exception as e:
+        print("Inverse Kinematics failed! Exception: ", e)
+    for ang in angles:
+        kit.servo[ang].angle = angles[ang]
 
 def penup(x, y, z):
     prev_state = 0
     try:
-        angles = IK_Solve(x, y, z+10) 
-        except Exception as e:
-            print("Inverse Kinematics failed! Exception: ", e)
-        for ang in angles:
-            kit.servo[ang].angle = angles[ang]
+        angles = IK_Solve(x, y, z+10)
+    except Exception as e:
+        print("Inverse Kinematics failed! Exception: ", e)
+    for ang in angles:
+        kit.servo[ang].angle = angles[ang]
