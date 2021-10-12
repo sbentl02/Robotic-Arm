@@ -20,6 +20,7 @@ if __name__ == "__main__":
     isWriting = False
     N = 20
     step_interval = 10 #time per motor move in ms
+    prev_state = 0
 
     #Setup GPIO control
     LED_RED = 23
@@ -41,6 +42,11 @@ if __name__ == "__main__":
     kit.servo[1].angle = 60
     kit.servo[2].angle = 30
     kit.servo[3].angle = 90
+
+    #Read in SVG file
+    paths, attributes, svg_attributes = svg2paths2(filename)
+    xy_coords = read_SVG(filename, 10)
+   
 
 def time_ms():
     return time.time_ns() / 1000000
@@ -64,9 +70,13 @@ def main():
                 GPIO.output(LED_GREEN, 1)
             else: GPIO.output(LED_GREEN, 0)
 
+
             if (isWriting == True) & (not isMoving):
                 if current_time - previous_time >= step_interval: #Check to see if we have taken longer than the step interval
                     #Get current path step
+
+                    # Get x,y coordinates for drawing
+                    x,y,down = get_xy(xy_coords, i)
                     
                     #Get Z given current z mesh status
                     if has_ZMesh:
@@ -85,6 +95,12 @@ def main():
 
                     for ang in angles:
                         kit.servo[ang].angle = angles[ang]
+                    
+                    if (down and not prev_state):
+                        pendown(x, y, z)
+                    elif (not down and prev_state):
+                        penup(x, y, z)
+                    
                     previous_time += step_interval
 
 
@@ -105,3 +121,23 @@ def sample_surface(n_samples, xbounds, ybounds):
     np.empty((n_samples, n_samples))
     xpoints = 
     return
+
+def pendown(x, y, z):
+    prev_state = 1
+    #Attempt IK Solving
+    try:
+        angles = IK_Solve(x, y, z-10) 
+        except Exception as e:
+            print("Inverse Kinematics failed! Exception: ", e)
+        for ang in angles:
+            kit.servo[ang].angle = angles[ang]
+                   
+
+def penup(x, y, z):
+    prev_state = 0
+    try:
+        angles = IK_Solve(x, y, z+10) 
+        except Exception as e:
+            print("Inverse Kinematics failed! Exception: ", e)
+        for ang in angles:
+            kit.servo[ang].angle = angles[ang]

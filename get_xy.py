@@ -12,7 +12,7 @@ def read_SVG(filename, sampling_rate):
     paths, attributes, svg_attributes = svg2paths2(filename)
     dimensions = svg_attributes['viewBox']
     dims = dimensions.split()
-    #TODO: something to scale dimensions to appropriate
+    #TODO: something to scale dimensions to appropriate?
 
     xy_coords = []
 
@@ -21,9 +21,9 @@ def read_SVG(filename, sampling_rate):
         for seg in path:
             print("New seg")
             for i in range(0, sampling_rate + 1):
-                if (i+1 >= sampling_rate): #End of segment, pen up
+                if (i+1 >= sampling_rate): #End of segment, pen up with 0
                     xy = tuple((seg.point(i/sampling_rate).real, seg.point(i/sampling_rate).imag, 0))
-                elif (i == 0): #Beginning of segment, pen down
+                elif (i == 0): #Beginning of segment, pen down when 1
                     xy = tuple((seg.point(i/sampling_rate).real, seg.point(i/sampling_rate).imag, 1))   
                 else: 
                     xy = tuple((seg.point(i/sampling_rate).real, seg.point(i/sampling_rate).imag, 1))
