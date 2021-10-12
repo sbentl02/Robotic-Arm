@@ -64,6 +64,7 @@ def main():
                 has_ZMesh = True
             else:
                 GPIO.output(LED_RED, 0)
+                has_ZMesh = False
 
             if hasZMesh:
                 GPIO.output(LED_GREEN, 1)
