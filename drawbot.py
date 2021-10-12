@@ -39,7 +39,7 @@ kit.servo[3].angle = 90
 #Read in SVG file
 xy_coords = read_SVG("Examples/initials_JA.svg", 10)
 
-def time_ms():
+def time_ms(): #Convert from ns to ms
     return time.time_ns() / 1000000
 
 def main():
@@ -47,9 +47,9 @@ def main():
     previous_time = 0
     isMoving = False
     hasZMesh = False
-    z_offset = 20
     sample_z = False
     isWriting = False
+    z_offset = 20 #Distance from base frame to floor in mm
     N = 20
     step_interval = 100 #time per motor move in ms
     prev_state = 0
@@ -70,17 +70,13 @@ def main():
                 GPIO.output(LED_RED, 0)
                 hasZMesh = False
 
-            if hasZMesh:
+            if hasZMesh: #Check for z mesh
                 GPIO.output(LED_GREEN, 1)
             else: GPIO.output(LED_GREEN, 0)
 
-
             if (isWriting == True) & (not isMoving):
                 if current_time - previous_time >= step_interval: #Check to see if we have taken longer than the step interval
-                    #Get current path step
-
                     # Get x,y coordinates for drawing
-
                     returned = get_xy(xy_coords, i)
                     if returned == None:
                         break
@@ -92,44 +88,44 @@ def main():
 
                     #Get Z given current z mesh status
                     if hasZMesh:
-                        z = fit_func((x, y), inter, coef)
+                        z = fit_func((x, y), inter, coef) #Find z point given x and y coordinates
                     else:
-                        z = z_offset
-
+                        z = z_offset #Otherwise write on a flat plane
 
                     previous_time = current_time
 
                     #Attempt IK Solving
                     try:
-                        angles = IK_Solve(x, y, z)
+                        angles = IK_Solve(x, y, z) #Try to solve IK equations
                     except Exception as e:
                         print("Inverse Kinematics failed! Exception: ", e)
 
+                    #Move the servos 
                     for j in range(len(angles)):
                         kit.servo[j].angle = angles[j]
                     i += 1
 
-                    """ if (down and not prev_state):
+                    #Move pen up or down 
+                    if (down and not prev_state):
                         pendown(x, y, z)
                     elif (not down and prev_state):
-                        penup(x, y, z) """
+                        penup(x, y, z)
 
-                    previous_time += step_interval
+                    previous_time += step_interval #Make sure the timing is consistent
+
         except KeyboardInterrupt:
             break
     return
 
-def sample_z_point(x, y):
+def sample_z_point(x, y): #Sample a z point with lidar sensor
     angles = IK_Solve(x, y, 0)
 
     for j in range(len(angles)):
         kit.servo[j].angle = angles[j]
-
     time.sleep(0.5)
-
     return lidar.range
 
-def sample_surface(N, xbounds, ybounds):
+def sample_surface(N, xbounds, ybounds): #Sample points in N x N grid
     z_data = np.empty((N,N))
 
     xmin = xbounds[0]
@@ -149,7 +145,7 @@ def sample_surface(N, xbounds, ybounds):
             j += 1
         i += 1
 
-""" def pendown(x, y, z):
+def pendown(x, y, z):
     prev_state = 1
     #Attempt IK Solving
     try:
@@ -166,8 +162,7 @@ def penup(x, y, z):
     except Exception as e:
         print("Inverse Kinematics failed! Exception: ", e)
     for j in range(len(angles)):
-        kit.servo[j].angle = angles[j] """
-
+        kit.servo[j].angle = angles[j]
 
 if __name__ == "__main__":
     main()
