@@ -10,17 +10,6 @@ from get_xy import get_xy, read_SVG
 #Initialize servo communication
 kit = ServoKit(channels=16)
 
-#Initialize global state variables
-previous_time = 0
-isMoving = False
-hasZMesh = False
-z_offset = 90
-sample_z = False
-isWriting = False
-N = 20
-step_interval = 10 #time per motor move in ms
-prev_state = 0
-
 #Setup GPIO control
 LED_RED = 23
 LED_GREEN = 24
@@ -49,6 +38,17 @@ def time_ms():
     return time.time_ns() / 1000000
 
 def main():
+    #Initialize global state variables
+    previous_time = 0
+    isMoving = False
+    hasZMesh = False
+    z_offset = 90
+    sample_z = False
+    isWriting = False
+    N = 20
+    step_interval = 10 #time per motor move in ms
+    prev_state = 0
+    
     while True:
         try:
             current_time = time_ms()
