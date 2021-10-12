@@ -11,7 +11,7 @@ def IK_Solve(x, y, z):
     r = math.sqrt(x**2 + y**2) - 9
 
     #Base angle is equal to theta
-    theta1 = theta + math.pi/2
+    theta1 = theta
 
     #Inverse Kinematic Equations for 3-link planar arm
     length1 = 102.7
@@ -19,8 +19,8 @@ def IK_Solve(x, y, z):
     length3 = 35.1
 
     #Set end effector coordinates
-    x_e = z
-    y_e = r
+    x_e = r
+    y_e = z
     phi_e = math.pi/2
 
     #Find wrist coordinates
