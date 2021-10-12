@@ -45,7 +45,7 @@ if __name__ == "__main__":
 
     #Read in SVG file
     paths, attributes, svg_attributes = svg2paths2(filename)
-    xy_coords = read_SVG(filename, 10)
+    xy_coords = read_SVG("Examples/initials_JA.svg", 10)
    
 
 def time_ms():

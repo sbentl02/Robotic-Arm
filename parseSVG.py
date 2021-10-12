@@ -22,5 +22,5 @@ def simulate(filename, sampling_rate):
         else:
             t.penup()
 
-simulate('Examples\initials_JA.svg', 10)
+simulate('Examples/initials_JA.svg', 10)
 
