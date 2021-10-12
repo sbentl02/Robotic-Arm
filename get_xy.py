@@ -4,7 +4,7 @@ def get_xy(xy_coords, timestep):
     #check timestep within bounds
     if (timestep >= len(xy_coords)):
         print("Timestep out of bounds")
-        return
+        return None
     xy = xy_coords[timestep]
     return xy[0], xy[1], xy[2]
 

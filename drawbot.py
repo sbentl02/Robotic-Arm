@@ -76,7 +76,15 @@ def main():
                     #Get current path step
 
                     # Get x,y coordinates for drawing
-                    x,y,down = get_xy(xy_coords, i)
+
+                    returned = get_xy(xy_coords, i)
+                    if returned == None:
+                        break
+                    else:
+                        x = returned[0]
+                        y = returned[1]
+                        down = returned[2]
+
 
                     #Get Z given current z mesh status
                     if hasZMesh:
