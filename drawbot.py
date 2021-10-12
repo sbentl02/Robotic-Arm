@@ -4,6 +4,7 @@ import board, busio
 import RPi.GPIO as GPIO
 from surface_mapping import *
 from adafruit_servokit import ServoKit
+import adafruit_vl53l0x
 from motors import IK_Solve
 from get_xy import get_xy, read_SVG
 from svgpathtools import svg2paths2 
@@ -25,6 +26,9 @@ GPIO.setup(MESH_PIN, GPIO.IN)
 GPIO.setup(DRAW_PIN, GPIO.IN)
 
 #Start communication with Lidar
+i2c = busio.I2C(board.SCL, board.SDA)
+lidar = adafruit_vl53l0x.VL53L0X(i2c)
+lidar.measurement_timing_budget = 50000
 
 #Move servos to initial positions
 kit.servo[0].angle = 90
@@ -123,6 +127,27 @@ def sample_z_point(x, y):
 
     time.sleep(0.5)
 
+    return lidar.range
+
+def sample_surface(N, xbounds, ybounds):
+    z_data = np.empty((N,N))
+
+    xmin = xbounds[0]
+    xmax = xbounds[1]
+
+    ymin = ybounds[0]
+    ymax = ybounds[1]
+
+    x = np.linspace(xmin, xmax, N)
+    y = np.linspace(ymin, ymax, N)
+    i = 0
+    j = 0
+    for xval in x:
+        for yval in y:
+            zval = sample_z_point(xval, yval)
+            z_data[i][j]
+            j += 1
+        i += 1
 
 def pendown(x, y, z):
     prev_state = 1
