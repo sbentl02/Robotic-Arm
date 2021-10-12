@@ -63,8 +63,8 @@ def main():
 
             if sample_z == True:
                 GPIO.output(LED_RED, 1)
-                z_data = sample_surface(N, (-100, 100), (10, 100))
-                inter, coef = surface_approximation(N, z_data, (-100, 100), (10, 100))
+                z_data = sample_surface(N, (0, 200), (10, 100))
+                inter, coef = surface_approximation(N, z_data, (0, 200), (10, 100))
                 hasZMesh = True
             else:
                 GPIO.output(LED_RED, 0)
@@ -138,8 +138,8 @@ def sample_surface(N, xbounds, ybounds):
     ymin = ybounds[0]
     ymax = ybounds[1]
 
-    x = np.linspace(xmin, xmax, N)
-    y = np.linspace(ymin, ymax, N)
+    x = np.linspace(xmin, xmax, N - 1)
+    y = np.linspace(ymin, ymax, N - 1)
     i = 0
     j = 0
     for xval in x:
