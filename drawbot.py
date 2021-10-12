@@ -61,10 +61,10 @@ def main():
                 GPIO.output(LED_RED, 1)
                 z_data = sample_surface(N, (-100, 100), (10, 100))
                 inter, coef = surface_approximation(N, z_data, (-100, 100), (10, 100))
-                has_ZMesh = True
+                hasZMesh = True
             else:
                 GPIO.output(LED_RED, 0)
-                has_ZMesh = False
+                hasZMesh = False
 
             if hasZMesh:
                 GPIO.output(LED_GREEN, 1)
@@ -79,7 +79,7 @@ def main():
                     x,y,down = get_xy(xy_coords, i)
 
                     #Get Z given current z mesh status
-                    if has_ZMesh:
+                    if hasZMesh:
                         z = fit_func((x, y), inter, coef)
                     else:
                         z = z_offset
