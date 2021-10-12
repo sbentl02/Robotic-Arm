@@ -32,7 +32,7 @@ def read_SVG(filename, sampling_rate):
 
 
 #Sample code    
-xy_coords = read_SVG('Examples\SCB.svg', 10)
-x,y,down = get_xy(xy_coords, len(xy_coords) - 12)
-print(x, y, down)
+#xy_coords = read_SVG('Examples\SCB.svg', 10)
+#x,y,down = get_xy(xy_coords, len(xy_coords) - 12)
+#print(x, y, down)
 
