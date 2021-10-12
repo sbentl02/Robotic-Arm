@@ -43,7 +43,7 @@ def main():
     previous_time = 0
     isMoving = False
     hasZMesh = False
-    z_offset = 10
+    z_offset = 50
     sample_z = False
     isWriting = False
     N = 20
