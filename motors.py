@@ -19,8 +19,8 @@ def IK_Solve(x, y, z):
     length3 = 35.1
 
     #Set end effector coordinates
-    x_e = r
-    y_e = z
+    x_e = z
+    y_e = r
     phi_e = math.pi/2
 
     #Find wrist coordinates
