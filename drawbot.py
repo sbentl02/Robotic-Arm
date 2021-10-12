@@ -109,10 +109,10 @@ def main():
                         kit.servo[j].angle = angles[j]
                     i += 1
 
-                    if (down and not prev_state):
+                    """ if (down and not prev_state):
                         pendown(x, y, z)
                     elif (not down and prev_state):
-                        penup(x, y, z)
+                        penup(x, y, z) """
 
                     previous_time += step_interval
         except KeyboardInterrupt:
@@ -149,7 +149,7 @@ def sample_surface(N, xbounds, ybounds):
             j += 1
         i += 1
 
-def pendown(x, y, z):
+""" def pendown(x, y, z):
     prev_state = 1
     #Attempt IK Solving
     try:
@@ -166,7 +166,7 @@ def penup(x, y, z):
     except Exception as e:
         print("Inverse Kinematics failed! Exception: ", e)
     for j in range(len(angles)):
-        kit.servo[j].angle = angles[j]
+        kit.servo[j].angle = angles[j] """
 
 
 if __name__ == "__main__":
