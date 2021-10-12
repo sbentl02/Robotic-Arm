@@ -6,49 +6,7 @@ from surface_mapping import *
 from adafruit_servokit import ServoKit
 from motors import IK_Solve
 from get_xy import get_xy, read_SVG
-from svgpathtools import svg2paths2
-
-if __name__ == "__main__":
-    #Initialize servo communication
-    kit = ServoKit(channels=16)
-
-    #Initialize global state variables
-    previous_time = 0
-    isMoving = False
-    hasZMesh = False
-    z_offset = 90
-    sample_z = False
-    isWriting = False
-    N = 20
-    step_interval = 10 #time per motor move in ms
-    prev_state = 0
-
-    #Setup GPIO control
-    LED_RED = 23
-    LED_GREEN = 24
-    MESH_PIN = 27
-    DRAW_PIN = 17
-
-    GPIO.setmode(GPIO.BCM)
-
-    GPIO.setup(LED_RED, GPIO.OUT)
-    GPIO.setup(LED_GREEN, GPIO.OUT)
-    GPIO.setup(MESH_PIN, GPIO.IN)
-    GPIO.setup(DRAW_PIN, GPIO.IN)
-
-    #Start communication with Lidar
-
-    #Move servos to initial positions
-    kit.servo[0].angle = 90
-    kit.servo[1].angle = 60
-    kit.servo[2].angle = 30
-    kit.servo[3].angle = 90
-
-    #Read in SVG file
-    xy_coords = read_SVG("Examples/initials_JA.svg", 10)
-
-    main()
-
+from svgpathtools import svg2paths2 
 
 def time_ms():
     return time.time_ns() / 1000000
@@ -135,3 +93,45 @@ def penup(x, y, z):
         print("Inverse Kinematics failed! Exception: ", e)
     for ang in angles:
         kit.servo[ang].angle = angles[ang]
+
+
+if __name__ == "__main__":
+    #Initialize servo communication
+    kit = ServoKit(channels=16)
+
+    #Initialize global state variables
+    previous_time = 0
+    isMoving = False
+    hasZMesh = False
+    z_offset = 90
+    sample_z = False
+    isWriting = False
+    N = 20
+    step_interval = 10 #time per motor move in ms
+    prev_state = 0
+
+    #Setup GPIO control
+    LED_RED = 23
+    LED_GREEN = 24
+    MESH_PIN = 27
+    DRAW_PIN = 17
+
+    GPIO.setmode(GPIO.BCM)
+
+    GPIO.setup(LED_RED, GPIO.OUT)
+    GPIO.setup(LED_GREEN, GPIO.OUT)
+    GPIO.setup(MESH_PIN, GPIO.IN)
+    GPIO.setup(DRAW_PIN, GPIO.IN)
+
+    #Start communication with Lidar
+
+    #Move servos to initial positions
+    kit.servo[0].angle = 90
+    kit.servo[1].angle = 60
+    kit.servo[2].angle = 30
+    kit.servo[3].angle = 90
+
+    #Read in SVG file
+    paths, attributes, svg_attributes = svg2paths2(filename)
+    xy_coords = read_SVG("Examples/initials_JA.svg", 10)
+    main()
