@@ -38,14 +38,14 @@ def IK_Solve(x, y, z):
     theta4 = phi_e - theta2 - theta3
     theta4_out = math.pi - theta4
 
-    print(theta2)
-    print(theta3)
-    print(theta4)
     rad2deg = 180/math.pi
     theta1_out = theta1 * rad2deg
     theta2_out = theta2_out * rad2deg
     theta3_out = theta3_out * rad2deg
     theta4_out = theta4_out * rad2deg
+    print(theta2_out)
+    print(theta3_out)
+    print(theta4_out)
     return [theta1_out, theta2_out, theta3_out, theta4_out]
 # kit.servo[0].angle = 180
 # kit.continuous_servo[1].throttle = 1
