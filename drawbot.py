@@ -43,7 +43,7 @@ def main():
     previous_time = 0
     isMoving = False
     hasZMesh = False
-    z_offset = 90
+    z_offset = 10
     sample_z = False
     isWriting = False
     N = 20
@@ -82,7 +82,7 @@ def main():
                     if hasZMesh:
                         z = fit_func((x, y), inter, coef)
                     else:
-                        z = -z_offset
+                        z = z_offset
 
 
                     previous_time = current_time
